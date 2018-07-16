@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: f3c382b79a6bf8c48a60f1d497c21f9c
+timeCreated: 1502392052
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Object001
+    100004: Plane001
+    100006: Object002
+    100008: Plane001_MeshPart0
+    100010: Plane001_MeshPart1
+    100012: Grass
+    100014: Grass1
+    100016: Grass_MeshPart0
+    100018: Grass_MeshPart1
+    100020: Object003
+    400000: //RootNode
+    400002: Object001
+    400004: Plane001
+    400006: Object002
+    400008: Plane001_MeshPart0
+    400010: Plane001_MeshPart1
+    400012: Grass
+    400014: Grass1
+    400016: Grass_MeshPart0
+    400018: Grass_MeshPart1
+    400020: Object003
+    2300000: Object001
+    2300002: Plane001
+    2300004: Object002
+    2300006: Plane001_MeshPart0
+    2300008: Plane001_MeshPart1
+    2300010: Grass1
+    2300012: Grass_MeshPart0
+    2300014: Grass_MeshPart1
+    2300016: Grass
+    2300018: Object003
+    3300000: Object001
+    3300002: Plane001
+    3300004: Object002
+    3300006: Plane001_MeshPart0
+    3300008: Plane001_MeshPart1
+    3300010: Grass1
+    3300012: Grass_MeshPart0
+    3300014: Grass_MeshPart1
+    3300016: Grass
+    3300018: Object003
+    4300000: Plane001
+    4300002: Object001
+    4300004: Object002
+    4300006: Plane001_MeshPart0
+    4300008: Plane001_MeshPart1
+    4300010: Grass_MeshPart0
+    4300012: Grass_MeshPart1
+    4300014: Grass1
+    4300016: Grass
+    4300018: Object003
+    6400000: Object001
+    6400002: Plane001
+    6400004: Object002
+    6400006: Plane001_MeshPart0
+    6400008: Plane001_MeshPart1
+    6400010: Grass1
+    6400012: Grass_MeshPart0
+    6400014: Grass_MeshPart1
+    6400016: Grass
+    6400018: Object003
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 120
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 15
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
