@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using System;
 using Profiles;
 
+
 [RequireComponent(typeof(CharacterController))]
 public class Controller : MonoBehaviour
 {
