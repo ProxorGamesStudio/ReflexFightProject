@@ -10,6 +10,7 @@ ModelImporter:
     100008: Water
     100010: Map001
     100012: Object004
+    100014: Sky001
     400000: Map
     400002: //RootNode
     400004: Object003
@@ -17,6 +18,7 @@ ModelImporter:
     400008: Water
     400010: Map001
     400012: Object004
+    400014: Sky001
     2100000: 'Material #25'
     2100002: _MapMaterial__326
     2100004: 'Material #117'
@@ -26,6 +28,10 @@ ModelImporter:
     2100012: No Name
     2100014: 'Material #521'
     2100016: 'Material #177'
+    2100018: 'Material #612'
+    2100020: 'Material #611'
+    2100022: 'Material #815'
+    2100024: 'Material #803'
     2300000: Map
     2300002: Object003
     2300004: //RootNode
@@ -51,6 +57,8 @@ ModelImporter:
     6400010: Object004
     7400000: Take 001
     9500000: //RootNode
+    10800000: Sky001
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -93,7 +101,7 @@ ModelImporter:
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
-    keepQuads: 0
+    keepQuads: 1
     weldVertices: 1
     preserveHierarchy: 0
     indexFormat: 0
@@ -104,8 +112,8 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
-    tangentImportMode: 3
+    normalImportMode: 0
+    tangentImportMode: 0
     normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
