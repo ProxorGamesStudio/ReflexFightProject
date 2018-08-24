@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
-using Profiles;
+using UnityEditorInternal;
 
+using Skills;
 
 [RequireComponent(typeof(CharacterController))]
 public class Controller : MonoBehaviour
@@ -43,6 +44,7 @@ public class Controller : MonoBehaviour
 
     #region Customisation window
     #if UNITY_EDITOR
+
     public int gridNum;
     public Transform Canvas;
     public GameObject skillExamplePrefab;
@@ -50,9 +52,11 @@ public class Controller : MonoBehaviour
     public Font skillsFont;
     public int fontSize, skilltype;
     public Texture2D textIco, paramIco, cooldownIco;
-    public ControllerProfile profile;
 
     public bool setControllerHide;
+
+    public ReorderableList listSkills = null;
+
     #endif
     #endregion
 
@@ -69,6 +73,11 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
+        Movement();
+    }
+
+    private void Movement()
+    {
         float max = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(GameplayUI.InputVector.x, 2) + Mathf.Pow(GameplayUI.InputVector.z, 2)));
         controller.Move(-Vector3.up * gravity * Time.deltaTime);
         if (max > minAxis)
@@ -83,8 +92,13 @@ public class Controller : MonoBehaviour
             else dir_anim = Mathf.Lerp(dir_anim, 0, SmoothRotation * Time.deltaTime);
             animator.SetFloat("Speed", max);
             animator.SetFloat("Direction", dir_anim);
-        } else animator.SetFloat("Speed", 0);
+        }
+        else animator.SetFloat("Speed", 0);
 
+    }
+
+    private void Attack()
+    {
         if (Input.GetMouseButtonDown(1))
             animator.CrossFade("Sword Attack Turn Right", 0.2f, 1);
     }
@@ -100,23 +114,3 @@ public class Controller : MonoBehaviour
     }
 }
 
-
-[Serializable]
-public class Skill 
-{
-    public Sprite icon;
-    public Controller.typeOfSkill TypeOfSkill;
-    public string SkillName, Discription;
-    public float Range, UseTime, Cooldown, Param;
-    bool onCooldown;
-    public Vector3 pos;
-    public string InvokedVoid;
-
-    public Skill(string name)
-    {
-        icon = null;
-        TypeOfSkill = Controller.typeOfSkill.directed;
-        SkillName = name;
-    }
-
-}
