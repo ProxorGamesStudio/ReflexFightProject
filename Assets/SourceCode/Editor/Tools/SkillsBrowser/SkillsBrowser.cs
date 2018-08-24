@@ -31,7 +31,7 @@ public partial class ControllerBrowser : Editor
                 }
                 catch
                 {
-                    window.skills[index] = (Skill)EditorGUI.ObjectField(rect, "Emty Skill", window.skills[index], typeof(Skill), false);
+                    window.skills[index] = (Skill)EditorGUI.ObjectField(rect, "Empty Skill", window.skills[index], typeof(Skill), false);
                 }
                     
             };
