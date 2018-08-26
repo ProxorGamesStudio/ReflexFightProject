@@ -10,10 +10,6 @@ using Skills;
 [RequireComponent(typeof(CharacterController))]
 public class Controller : MonoBehaviour
 {
-    public enum typeOfSkill
-    {
-        directed, non_directed, directed_on_target
-    }
 
     #region Params
     public CharacterController controller { get { return GetComponent<CharacterController>(); } set { value = GetComponent<CharacterController>(); } }
@@ -36,14 +32,17 @@ public class Controller : MonoBehaviour
     private float dir_anim;
 
     [HideInInspector]
-    public bool nonClick, usedTeleport, stop, actioned;
+    public int animNum;
 
     [HideInInspector]
-    public int skill = 0, animNum;
+    public bool nonClick;
+
+    [HideInInspector]
+    public static Controller instance;
     #endregion
 
     #region Customisation window
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
 
     public int gridNum;
     public Transform Canvas;
@@ -63,15 +62,21 @@ public class Controller : MonoBehaviour
     #region Constnats 
     const float maxAngle = 50f;
     const float minAxis = 0.14f;
+
     #endregion
 
-    void Start()
+    private void Awake()
     {
-        mainCamera = FindObjectOfType<TheCamera>();
-        GameplayUI = FindObjectOfType<GameplayUI>();
+        instance = this;
     }
 
-    void Update()
+    private void Start()
+    {
+        mainCamera = TheCamera.instance;
+        GameplayUI = GameplayUI.instance;
+    }
+
+    private void Update()
     {
         Movement();
     }
@@ -101,11 +106,6 @@ public class Controller : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
             animator.CrossFade("Sword Attack Turn Right", 0.2f, 1);
-    }
-
-    public void SetSkill(int num)
-    {
-        skill = num;
     }
 
     public float GetNormalizedAngle(float value, float max)

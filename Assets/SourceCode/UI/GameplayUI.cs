@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class GameplayUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
 
+    public static GameplayUI instance;
+
     public Image JoistickBackground, JoystickCircle;
 
     private Vector3 _inputVector;
@@ -17,8 +19,16 @@ public class GameplayUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             return _inputVector;
         }
     }
+
+
     [HideInInspector]
     public bool dragged;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void OnPointerDown(PointerEventData e)
     {
