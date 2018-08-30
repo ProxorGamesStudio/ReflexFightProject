@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditorInternal;
-
 using Skills;
 
 [RequireComponent(typeof(CharacterController))]
@@ -12,18 +11,13 @@ public class Controller : MonoBehaviour
 {
 
     #region Params
-    public CharacterController controller { get { return GetComponent<CharacterController>(); } set { value = GetComponent<CharacterController>(); } }
     public Animator animator;
-    public TheCamera mainCamera;
-    public GameplayUI GameplayUI;
     public Transform pointer;
-
     public List<Skill> skills;
-
     public float stopAnimDistance, speed, rotationSpeed, gravity;
+    
     //for animations
     public float SmoothRotation;
-
     #endregion
 
     #region Varablies
@@ -31,13 +25,17 @@ public class Controller : MonoBehaviour
     private Vector3 direction;
     private float dir_anim;
 
+    private SurfaceDetectionComponent SurfaceDetectionComponent;
+    private TheCamera mainCamera;
+    private GameplayUI GameplayUI;
+    private CharacterController controller;
+
     [HideInInspector]
     public int animNum;
 
     [HideInInspector]
     public bool nonClick;
 
-    [HideInInspector]
     public static Controller instance;
     #endregion
 
@@ -72,6 +70,8 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
+        SurfaceDetectionComponent = GetComponentInChildren<SurfaceDetectionComponent>();
         mainCamera = TheCamera.instance;
         GameplayUI = GameplayUI.instance;
     }
