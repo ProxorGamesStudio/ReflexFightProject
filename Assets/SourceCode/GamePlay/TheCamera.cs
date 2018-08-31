@@ -41,13 +41,12 @@ public class TheCamera : MonoBehaviour {
         smTarget = (new GameObject("smTarget")).transform;
         controller = FindObjectOfType<Controller>();
 
-        cam.position -= new Vector3(0, Offset.z, 0);
         smTarget.position = cam.position;
     }
 
     void LateUpdate()
     {
-        smTarget.position = new Vector3(target.position.x - Offset.x, smTarget.position.y, target.position.z - Offset.y);
+        smTarget.position = new Vector3(target.position.x - Offset.x, target.position.y + Offset.y, target.position.z - Offset.z);
         cam.position = Vector3.Lerp(cam.position, smTarget.position, speed * Time.deltaTime);
     }
 
