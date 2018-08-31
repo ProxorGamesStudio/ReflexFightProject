@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class SurfaceDetectionComponent : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class SurfaceDetectionComponent : MonoBehaviour
 
     private void Awake()
     {
-        hitPoint = transform.position;       
+        
     }
 
     public void DoStep(float mode)

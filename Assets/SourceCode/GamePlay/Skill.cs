@@ -2,14 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace Skills
 {
 
     public class Skill : ScriptableObject
     {
-
         public string name;
         public string discription;
 
@@ -17,9 +18,10 @@ namespace Skills
 
         public Sprite icon;
 
-        public delegate Action SkillStartup<T>(T info);
+        public delegate Action skillAction<T>(params T[] info);
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(Skill))]
     [CanEditMultipleObjects]
     public partial class SkillBrowser : Editor
@@ -64,4 +66,5 @@ namespace Skills
 
         }
     }
+#endif
 }

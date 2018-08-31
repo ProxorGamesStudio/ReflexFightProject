@@ -11,6 +11,12 @@ namespace Skills
     public class skill_SwordAttack : Skill
     {
         public float AttackSpeed;
+
+        private void Awake()
+        {
+
+        }
+
     }
 
     [CustomEditor(typeof(skill_SwordAttack))]

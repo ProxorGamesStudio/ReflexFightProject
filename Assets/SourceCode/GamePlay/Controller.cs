@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+//Unity
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditorInternal;
+//Custom
 using Skills;
+using ProxorServer;
 
 [RequireComponent(typeof(CharacterController))]
 public class Controller : MonoBehaviour
@@ -12,26 +15,22 @@ public class Controller : MonoBehaviour
 
     #region Params
     public Animator animator;
-    public Transform pointer;
     public List<Skill> skills;
-    public float stopAnimDistance, speed, rotationSpeed, gravity;
-    
+    public float speed;
+    public float rotationSpeed;
+    public float gravity; 
     //for animations
     public float SmoothRotation;
     #endregion
 
     #region Varablies
-    private RaycastHit hit;
     private Vector3 direction;
-    private float dir_anim;
+    private float currentAnim;
 
     private SurfaceDetectionComponent SurfaceDetectionComponent;
     private TheCamera mainCamera;
     private GameplayUI GameplayUI;
     private CharacterController controller;
-
-    [HideInInspector]
-    public int animNum;
 
     [HideInInspector]
     public bool nonClick;
@@ -40,27 +39,26 @@ public class Controller : MonoBehaviour
     #endregion
 
     #region Customisation window
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
 
-    public int gridNum;
     public Transform Canvas;
-    public GameObject skillExamplePrefab;
-    public Color skillsColor, skillsCooldownColor, skillsCooldownTextColor;
-    public Font skillsFont;
-    public int fontSize, skilltype;
     public Texture2D textIco, paramIco, cooldownIco;
-
-    public bool setControllerHide;
-
     public ReorderableList listSkills = null;
-
     #endif
+
     #endregion
 
     #region Constnats 
     const float maxAngle = 50f;
     const float minAxis = 0.14f;
 
+    #endregion
+
+    #region Network
+    [Synchronizable]
+    public Vector3 nPosition;
+    [Synchronizable]
+    public Quaternion nRotation;
     #endregion
 
     private void Awake()
@@ -79,6 +77,7 @@ public class Controller : MonoBehaviour
     private void Update()
     {
         Movement();
+        HandleInformation();
     }
 
     private void Movement()
@@ -92,11 +91,11 @@ public class Controller : MonoBehaviour
             {
                 float angle = (float)(Math.Atan2(GameplayUI.InputVector.x, GameplayUI.InputVector.z) / Math.PI * 180);
                 transform.eulerAngles = new Vector3(transform.localEulerAngles.x, Mathf.LerpAngle(transform.localEulerAngles.y, angle, rotationSpeed * Time.deltaTime), transform.localEulerAngles.x);
-                dir_anim = Mathf.Lerp(dir_anim, GetNormalizedAngle(Mathf.DeltaAngle(transform.localEulerAngles.y, angle), maxAngle), SmoothRotation * Time.deltaTime);
+                currentAnim = Mathf.Lerp(currentAnim, GetNormalizedAngle(Mathf.DeltaAngle(transform.localEulerAngles.y, angle), maxAngle), SmoothRotation * Time.deltaTime);
             }
-            else dir_anim = Mathf.Lerp(dir_anim, 0, SmoothRotation * Time.deltaTime);
+            else currentAnim = Mathf.Lerp(currentAnim, 0, SmoothRotation * Time.deltaTime);
             animator.SetFloat("Speed", max);
-            animator.SetFloat("Direction", dir_anim);
+            animator.SetFloat("Direction", currentAnim);
         }
         else animator.SetFloat("Speed", 0);
 
@@ -112,5 +111,13 @@ public class Controller : MonoBehaviour
     {
         return Math.Abs(value) > max ? Math.Sign(value) : (value / (max / 100)) / 100;
     }
+
+    #region Network
+    public void HandleInformation()
+    {
+        nPosition = transform.position;
+        nRotation = transform.rotation;
+    }
+    #endregion
 }
 
