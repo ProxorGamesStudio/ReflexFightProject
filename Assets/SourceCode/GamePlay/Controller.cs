@@ -1,32 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
-using Profiles;
-
+using UnityEditorInternal;
+using Skills;
 
 [RequireComponent(typeof(CharacterController))]
 public class Controller : MonoBehaviour
 {
-    public enum typeOfSkill
-    {
-        directed, non_directed, directed_on_target
-    }
 
     #region Params
-    public CharacterController controller { get { return GetComponent<CharacterController>(); } set { value = GetComponent<CharacterController>(); } }
     public Animator animator;
-    public TheCamera mainCamera;
-    public GameplayUI GameplayUI;
     public Transform pointer;
-
     public List<Skill> skills;
-
     public float stopAnimDistance, speed, rotationSpeed, gravity;
+    
     //for animations
     public float SmoothRotation;
-
     #endregion
 
     #region Varablies
@@ -34,15 +25,23 @@ public class Controller : MonoBehaviour
     private Vector3 direction;
     private float dir_anim;
 
-    [HideInInspector]
-    public bool nonClick, usedTeleport, stop, actioned;
+    private SurfaceDetectionComponent SurfaceDetectionComponent;
+    private TheCamera mainCamera;
+    private GameplayUI GameplayUI;
+    private CharacterController controller;
 
     [HideInInspector]
-    public int skill = 0, animNum;
+    public int animNum;
+
+    [HideInInspector]
+    public bool nonClick;
+
+    public static Controller instance;
     #endregion
 
     #region Customisation window
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
+
     public int gridNum;
     public Transform Canvas;
     public GameObject skillExamplePrefab;
@@ -50,24 +49,39 @@ public class Controller : MonoBehaviour
     public Font skillsFont;
     public int fontSize, skilltype;
     public Texture2D textIco, paramIco, cooldownIco;
-    public ControllerProfile profile;
 
     public bool setControllerHide;
+
+    public ReorderableList listSkills = null;
+
     #endif
     #endregion
 
     #region Constnats 
     const float maxAngle = 50f;
     const float minAxis = 0.14f;
+
     #endregion
 
-    void Start()
+    private void Awake()
     {
-        mainCamera = FindObjectOfType<TheCamera>();
-        GameplayUI = FindObjectOfType<GameplayUI>();
+        instance = this;
     }
 
-    void Update()
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        SurfaceDetectionComponent = GetComponentInChildren<SurfaceDetectionComponent>();
+        mainCamera = TheCamera.instance;
+        GameplayUI = GameplayUI.instance;
+    }
+
+    private void Update()
+    {
+        Movement();
+    }
+
+    private void Movement()
     {
         float max = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(GameplayUI.InputVector.x, 2) + Mathf.Pow(GameplayUI.InputVector.z, 2)));
         controller.Move(-Vector3.up * gravity * Time.deltaTime);
@@ -83,15 +97,15 @@ public class Controller : MonoBehaviour
             else dir_anim = Mathf.Lerp(dir_anim, 0, SmoothRotation * Time.deltaTime);
             animator.SetFloat("Speed", max);
             animator.SetFloat("Direction", dir_anim);
-        } else animator.SetFloat("Speed", 0);
+        }
+        else animator.SetFloat("Speed", 0);
 
-        if (Input.GetMouseButtonDown(1))
-            animator.CrossFade("Sword Attack Turn Right", 0.2f, 1);
     }
 
-    public void SetSkill(int num)
+    private void Attack()
     {
-        skill = num;
+        if (Input.GetMouseButtonDown(1))
+            animator.CrossFade("Sword Attack Turn Right", 0.2f, 1);
     }
 
     public float GetNormalizedAngle(float value, float max)
@@ -100,23 +114,3 @@ public class Controller : MonoBehaviour
     }
 }
 
-
-[Serializable]
-public class Skill 
-{
-    public Sprite icon;
-    public Controller.typeOfSkill TypeOfSkill;
-    public string SkillName, Discription;
-    public float Range, UseTime, Cooldown, Param;
-    bool onCooldown;
-    public Vector3 pos;
-    public string InvokedVoid;
-
-    public Skill(string name)
-    {
-        icon = null;
-        TypeOfSkill = Controller.typeOfSkill.directed;
-        SkillName = name;
-    }
-
-}
