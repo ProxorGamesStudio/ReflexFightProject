@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: bf3dc4d5628c9b247b0cf99188394770
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: Cylinder001
     100002: Cylinder002
@@ -89,6 +89,7 @@ ModelImporter:
     6400000: //RootNode
     6400002: Map
     6400004: Text001
+    7400000: Take 001
     9500000: //RootNode
     10800000: Sky001
     2186277476908879412: ImportLogs
@@ -143,6 +144,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.0254
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
