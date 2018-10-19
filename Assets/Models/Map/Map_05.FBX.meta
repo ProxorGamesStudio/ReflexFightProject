@@ -18,6 +18,8 @@ ModelImporter:
     100024: Tree
     100026: Tree001
     100028: Text001
+    100030: Object019
+    100032: Plant
     400000: Cylinder001
     400002: Cylinder002
     400004: Fountain
@@ -33,6 +35,8 @@ ModelImporter:
     400024: Tree
     400026: Tree001
     400028: Text001
+    400030: Object019
+    400032: Plant
     2100000: 'Material #117'
     2100002: 'Material #177'
     2100004: 'Material #521'
@@ -49,6 +53,15 @@ ModelImporter:
     2100026: 'Material #2523'
     2100028: 'Material #2522'
     2100030: No Name
+    2100032: 'Material #12988'
+    2100034: Rock1
+    2100036: 'Material #13044'
+    2100038: 'Material #13385'
+    2100040: 'Material #13421'
+    2100042: 'Material #17872'
+    2100044: 'Material #17878'
+    2100046: Material__815
+    2100048: 'Material #18089'
     2300000: Cylinder001
     2300002: Cylinder002
     2300004: Fountain
@@ -61,6 +74,8 @@ ModelImporter:
     2300018: Tree001
     2300020: //RootNode
     2300022: Text001
+    2300024: Object019
+    2300026: Plant
     3300000: Cylinder001
     3300002: Cylinder002
     3300004: Fountain
@@ -73,6 +88,8 @@ ModelImporter:
     3300018: Tree001
     3300020: //RootNode
     3300022: Text001
+    3300024: Object019
+    3300026: Plant
     4300000: Map
     4300002: Cylinder001
     4300004: Cylinder002
@@ -86,9 +103,12 @@ ModelImporter:
     4300020: Text001
     4300022: Map001
     4300024: Object019
+    4300026: Plant
     6400000: //RootNode
     6400002: Map
     6400004: Text001
+    6400006: Object019
+    6400008: Plant
     7400000: Take 001
     9500000: //RootNode
     10800000: Sky001
