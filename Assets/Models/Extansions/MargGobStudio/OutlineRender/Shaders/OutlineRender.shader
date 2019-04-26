@@ -26,6 +26,7 @@
 			float4 _CameraDepthTexture_ST;
 			// Shader variables
 			int _lineThickness;
+			float _blackLinePower, _whiteLinePower, _DebugMode;
 
 			struct appdata	
 			{
@@ -74,7 +75,7 @@
 				//Normal and Depth
 				float4 nrmDepth = 0; //XYZ - normal, A - depth
 			    nrmDepth.a = SampleDepthNormal(UnityStereoScreenSpaceUVAdjust(uv, _CameraDepthTexture_ST), nrmDepth.xyz);
-			    float depthLerp = step(_ProjectionParams.z, nrmDepth.a);
+			    float depthLerp = step(_ProjectionParams.z - 1, nrmDepth.a);
 
 				//Position
 				const float2 p11_22 = (unity_CameraProjection._11, unity_CameraProjection._22);
@@ -84,13 +85,15 @@
 
 				//Outline
 				float3 ao = 0; 
-				float samples = 8;
+				float samples = 12;
 
-				const float2 sampleSize[8] = {
-				1,1,	-1,1,					
-				-1,-1,	1,-1,
+				const float2 sampleSize[12] = {
 				0,1,	1,0,
 				-1,0,	0,-1,
+				1,1,	-1,1,					
+				-1,-1,	1,-1,
+				0,2,	2,0,
+				-2,0,	0,-2,
 				};
 
 				for(int i = 0; i < samples; i++){
@@ -114,15 +117,17 @@
 				}
 
 				ao /= samples;
+				float3 mask = lerp(c.rgb, 0.5, ao.x + ao.y);
 				ao.x = (ao.x + ao.y) * 0.5 + 0.5;
 				ao.y = pow(smoothstep(0, 0.46, ao.x), 8);
-				ao.x = lerp(pow(smoothstep(0.60, 1, ao.x), 0.0675), 0,  depthLerp);
-				ao.z = 1 - smoothstep(0,1, ao.z);
+				ao.x = lerp(pow(smoothstep(0.65, 1, ao.x), 0.0675), 0,  depthLerp);
+				ao.z = smoothstep(0.65, 1, 1 - ao.z);
 
 				//Adding light edges
-				c.rgb += c.rgb * ao.x * 0.8;
+				c.rgb = lerp(c.rgb, 0.5, _DebugMode);
+				c.rgb += c.rgb * ao.x * _whiteLinePower; 
 				//Add darkening in the grooves and around the edges
-				c.rgb *= (ao.y * ao.z + 0.2) / 1.2;
+				c.rgb *= lerp(1, ao.y * ao.z, _blackLinePower);
 
 				return c;
 			}
